@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projetos Shell</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #container {
+        position: relative;
+        overflow: hidden;
+      }
+
+      #gif {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <img
+        id="gif"
+        src="https://annalucc.github.io/caminhosdoamanha/sobreanovela.gif"
+        alt=""
+        style="width: 100%; height: auto"
+      />
+    </div>
+
+    <script>
+      window.addEventListener("load", async function () {
+        const image = document.getElementById("gif");
+        const container = document.getElementById("container");
+
+        if (!image || !container) return;
+
+        const fixHeight = () => {
+          const heightRatio = image.naturalHeight / image.naturalWidth;
+          const rect = container.getBoundingClientRect();
+          const neededHeight = rect.width * heightRatio;
+          const height = 300;
+          const translation = (neededHeight - height) / 2;
+
+          Object.assign(image.style, {
+            transform: "translateY(" + -translation + "px)",
+          });
+          Object.assign(container.style, {
+            height: height + "px",
+          });
+
+          requestAnimationFrame(fixHeight);
+        };
+        requestAnimationFrame(fixHeight);
+      });
+    </script>
+  </body>
+</html>
